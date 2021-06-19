@@ -60,7 +60,7 @@ doc_content <- c(doc_content,
 doc_content <- c(doc_content, html_end)
 
 
-writeLines(doc_content, "output/thenews/index.html")
+writeLines(doc_content, "docs/index.html")
 
 
 
