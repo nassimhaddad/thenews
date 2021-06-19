@@ -34,6 +34,9 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
 
       - uses: r-lib/actions/setup-pandoc@master
+      
+      - name: Install curl
+        run: sudo apt-get install curl
 
       - name: Query dependencies
         run: |
