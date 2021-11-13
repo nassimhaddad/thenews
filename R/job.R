@@ -20,10 +20,8 @@ sub_items <- ul_all_months %>% html_elements("ul li") %>% as.character()
 main_items <- all_items[!all_items %in% sub_items]
 main_items <- rev(main_items)
 
-
-
 # removing items not corresponding to a month
-months_names <- rev(c("January", "February", "March", "April", "May", "June"))
+months_names <- rev(c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"))
 months_beginning <- paste0('^<li>\n<a href=\"/wiki/', months_names)
 beginning_checker <- paste(months_beginning, collapse = "|")
 main_items <- main_items[str_detect(main_items, beginning_checker)]
@@ -40,7 +38,10 @@ main_items <- str_remove_all(main_items, "<sup.*/sup>")
 # add beginning and end
 doc_content <- c(html_beginning, page_title)
 
-for (i in seq(months_names)){
+available_months <- which(sapply(lapply(months_beginning, str_detect, string = main_items), any))
+
+
+for (i in available_months){
   doc_content <- c(doc_content, 
                    month_titles[i], 
                    "<ul>",
